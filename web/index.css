@@ -1,0 +1,64 @@
+body{
+    background-color: aqua;
+}
+
+body,ul,li{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration:none;
+    color:inherit;
+}
+.menu{
+    text-align:center;
+
+}
+
+.menu>ul{
+    padding:0 20px;
+    display:inline-block;
+    background-color:gray;
+    border-radius:10px;
+}
+.menu>ul>li{
+    display:inline-block;
+}
+.menu ul>li{
+    position:relative;
+}
+.menu ul>li>a{
+    padding : 10px;
+    font-weight:bold;
+    white-space:nowrap;
+    display:block;
+}
+
+.menu ul>li:hover>a{
+    background-color:black;
+    color:white;
+}
+.menu ul ul{
+    position:absolute;
+    display:none;
+    top:100%;
+    left:0;
+
+}
+.menu ul ul ul{
+    top:0;
+    left:100%;
+
+}
+
+.menu ul>li:hover>ul{
+    display:block;
+    background-color: gray;
+
+}
+
+.menu > ul > li:last-child > ul ul {
+    legt:auto;
+    right: 100%;
+}
