@@ -1,8 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page
+        import = "org.example.Web_servlet.Rq"
+        import="jakarta.servlet.http.HttpServletRequest"
+        import="jakarta.servlet.http.HttpServletResponse" %>
 <%
-    int dan = Integer.parseInt(request.getParameter("dan"));
-    int limit = Integer.parseInt(request.getParameter("limit"));
+
+    Rq rq = new Rq(request,response );
+    int dan = rq.getIntParam("dan", 0);
+
+    System.out.println(dan);
+    int limit = rq.getIntParam("limit", 0);
+    
 %>
 
 <h1><%=dan%>단</h1>
