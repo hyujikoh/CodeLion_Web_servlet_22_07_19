@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page
-        import = "org.example.Web_servlet.Rq"
+        import = "org.example.Web_servlet.servlet_ver1.Rq"
         import="jakarta.servlet.http.HttpServletRequest"
         import="jakarta.servlet.http.HttpServletResponse" %>
 <%

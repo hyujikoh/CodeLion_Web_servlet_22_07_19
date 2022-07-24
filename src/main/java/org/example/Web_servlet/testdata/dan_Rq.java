@@ -1,10 +1,11 @@
-package org.example.Web_servlet;
+package org.example.Web_servlet.testdata;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.Web_servlet.servlet_ver1.Rq;
 
 import java.io.IOException;
 
