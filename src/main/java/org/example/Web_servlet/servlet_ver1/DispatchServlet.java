@@ -17,16 +17,38 @@ public class DispatchServlet extends HttpServlet {
         articleController articleController = new articleController();
         memberController memberController = new memberController();
         //resp.getWriter().append("Work?");
-        String url = req.getRequestURI();
 
-        switch (url) {
-            case "/usr/article/list/free":
-                articleController.showList(rq);
+
+
+        //String url = req.getRequestURI();
+
+        switch (rq.getMethod()) {
+            case "GET":
+                switch (rq.getPath()){
+                    case "/usr/article/list/free":
+                        articleController.showList(rq);
+                        break;
+                    case "/usr/article/write/free":
+                        articleController.showWrite(rq);
+                        break;
+                    case "/usr/member/login":
+                        memberController.showLogin(rq);
+                        break;
+                }
                 break;
-            case "/usr/member/login":
-                memberController.showLogin(rq);
+            case "POST":
+                switch (rq.getPath()) {
+                    case "/usr/article/write/free":
+                        articleController.doWrite(rq);
+                        break;
+                }
                 break;
         }
+
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
 
     }
 }

@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class articleController {
+    articleService articleService;
+    public articleController() {
+        articleService = new articleService();
+    }
+
     public void showList(Rq rq) throws IOException {
         rq.appendBody("게시물 리스트");
         List<ArticleDto> articleDtoList = new ArrayList<>();
@@ -21,5 +26,17 @@ public class articleController {
         rq.setAttr("articles", articleDtos);
         rq.view("user/article/list");
 
+    }
+
+    public void showWrite(Rq rq) {
+        rq.view("user/article/write");
+    }
+
+    public void doWrite(Rq rq) {
+        String title = rq.getParam("title", "");
+        String body = rq.getParam("body", "");
+
+        rq.appendBody("<div>title : %s</div>".formatted(title));
+        rq.appendBody("<div>body : %s</div>".formatted(body));
     }
 }
