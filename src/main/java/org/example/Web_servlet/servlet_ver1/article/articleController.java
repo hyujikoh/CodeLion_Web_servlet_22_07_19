@@ -39,6 +39,7 @@ public class articleController {
 
         rq.appendBody("%d번 게시물이 생성 되었습니다.".formatted(id));
     }
+
     public void showDetail(Rq rq) {
         long id = rq.getLongPathValueByIndex(1, 0);
 
@@ -55,6 +56,26 @@ public class articleController {
         }
 
         rq.setAttr("article", articleDto);
-        rq.view("usr/article/detail");
+        rq.view("user/article/detail");
     }
+    public void dodelete(Rq rq) {
+        long id = rq.getLongPathValueByIndex(1, 0);
+
+        if (id == 0) {
+            rq.appendBody("번호를 입력해주세요.");
+            return;
+        }
+
+        ArticleDto articleDto = articleService.findById(id);
+
+        if (articleDto == null) {
+            rq.appendBody("해당 글이 존재하지 않습니다.");
+            return;
+        }
+
+        articleService.delete(id);
+
+        rq.appendBody("%d번 게시물이 삭제되었습니다.".formatted(id));
+    }
+
 }

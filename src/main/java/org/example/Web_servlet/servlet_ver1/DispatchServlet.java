@@ -25,6 +25,9 @@ public class DispatchServlet extends HttpServlet {
         switch (rq.getMethod()) {
             case "GET":
                 switch (rq.getActionPath()){
+                    case "/usr/article/detail":
+                        articleController.showDetail(rq);
+                        break;
                     case "/usr/article/list":
                         articleController.showList(rq);
                         break;
@@ -34,6 +37,9 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/member/login":
                         memberController.showLogin(rq);
                         break;
+                    case "/usr/article/delete":
+                        articleController.dodelete(rq);
+                        break;
                 }
                 break;
             case "POST":
@@ -41,6 +47,7 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/write/free":
                         articleController.doWrite(rq);
                         break;
+
                 }
                 break;
         }
