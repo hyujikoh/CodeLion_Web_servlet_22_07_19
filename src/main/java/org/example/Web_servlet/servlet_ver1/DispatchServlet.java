@@ -38,20 +38,24 @@ public class DispatchServlet extends HttpServlet {
                         memberController.showLogin(rq);
                         break;
                     case "/usr/article/delete":
-                        articleController.dodelete(rq);
+                        articleController.doDelete(rq);
+                        break;
+                    case "/usr/article/modify":
+                        articleController.showModify(rq);
                         break;
                 }
                 break;
             case "POST":
-                switch (rq.getPath()) {
-                    case "/usr/article/write/free":
+                switch (rq.getActionPath()) {
+                    case "/usr/article/write":
                         articleController.doWrite(rq);
                         break;
-
+                    case "/usr/article/modify":
+                        articleController.doModify(rq);
+                        break;
                 }
                 break;
         }
-
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

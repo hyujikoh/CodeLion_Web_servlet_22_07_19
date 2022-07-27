@@ -2,7 +2,6 @@
 <%@ page import="org.example.Web_servlet.servlet_ver1.article.model.ArticleDto" %>
 <%@ page import="java.util.List" %>
 
-!
 <h1>게시물 작성</h1>
 
 <script>
@@ -20,9 +19,6 @@
         }
         return form.submit();
     }
-
-
-
 </script>
 
 

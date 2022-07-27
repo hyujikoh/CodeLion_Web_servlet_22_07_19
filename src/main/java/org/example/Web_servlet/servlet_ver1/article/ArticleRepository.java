@@ -56,4 +56,17 @@ public class ArticleRepository {
 
         datum.remove(articleDto);
     }
+
+    public void modify(long id, String title, String body) {
+        ArticleDto articleDto = findById(id);
+
+        if (articleDto == null) return;
+
+        articleDto.setTitle(title);
+        articleDto.setBody(body);
+    }
+
+    public static List<ArticleDto> findAll() {
+        return datum;
+    }
 }
