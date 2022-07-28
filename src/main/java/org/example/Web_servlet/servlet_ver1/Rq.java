@@ -4,11 +4,11 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.Web_servlet.servlet_ver1.util.Ut;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
-
+import java.util.List;
 
 public class Rq {
     private final HttpServletRequest req;
@@ -37,6 +37,20 @@ public class Rq {
         return value;
     }
 
+    public long getLongParam(String paramName, long defaultValue) {
+        String value = req.getParameter(paramName);
+
+        if (value == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
     public int getIntParam(String paramName, int defaultValue) {
         String value = req.getParameter(paramName);
 
@@ -51,16 +65,16 @@ public class Rq {
         }
     }
 
-    public void println(String str) {
-        print(str + "\n");
-    }
-
     public void print(String str) {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void println(String str) {
+        print(str + "\n");
     }
 
     public void setAttr(String name, Object value) {
@@ -89,7 +103,13 @@ public class Rq {
         return "/%s/%s/%s".formatted(bits[1], bits[2], bits[3]);
     }
 
-    public String getMethod() {
+    public String getRouteMethod() {
+        String method = getParam("_method", "");
+
+        if (method.length() > 0 ) {
+            return method.toUpperCase();
+        }
+
         return req.getMethod();
     }
 
@@ -117,6 +137,22 @@ public class Rq {
         }
     }
 
+    public void replace(String uri, String msg) {
+        if (msg != null && msg.trim().length() > 0) {
+            println("""
+                    <script>
+                    alert("%s");
+                    </script>
+                    """.formatted(msg));
+        }
+
+        println("""
+                <script>
+                location.replace("%s");
+                </script>
+                """.formatted(uri));
+    }
+
     public void historyBack(String msg) {
         if (msg != null && msg.trim().length() > 0) {
             println("""
@@ -133,20 +169,22 @@ public class Rq {
                 """);
     }
 
-    public void replace(String uri, String msg) {
+    public void json(Object resultData) {
+        resp.setContentType("application/json; charset=utf-8");
 
-        if (msg != null && msg.trim().length() > 0) {
-            println("""
-                    <script>
-                    alert("%s");
-                    </script>
-                    """.formatted(msg));
-        }
+        String jsonStr = Ut.json.toStr(resultData, "");
+        println(jsonStr);
+    }
 
-        println("""
-                <script>
-                location.replace("%s");
-                </script>
-                """.formatted(uri));
+    public void json(Object data, String resultCode, String msg) {
+        json(new ResultData(resultCode, msg, data));
+    }
+
+    public void successJson(Object data) {
+        json(data, "S-1", "성공");
+    }
+
+    public void failJson(Object data) {
+        json(data, "F-1", "실패");
     }
 }
