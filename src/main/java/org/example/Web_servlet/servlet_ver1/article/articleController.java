@@ -6,7 +6,6 @@ import org.example.Web_servlet.servlet_ver1.article.model.ArticleDto;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class articleController {
     articleService articleService;
     public articleController() {
