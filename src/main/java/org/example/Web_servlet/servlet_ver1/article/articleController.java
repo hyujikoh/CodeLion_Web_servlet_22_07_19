@@ -138,4 +138,8 @@ public class articleController {
 
         rq.successJson(articleDtos);
     }
+
+    public void showListAuto(Rq rq) {
+        rq.view("user/article/listAuto");
+    }
 }
